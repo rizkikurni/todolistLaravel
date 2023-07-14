@@ -30,4 +30,4 @@ Route::post('/login', [LoginController::class, 'authee']);
 //     return view('todolist.index');
 // })->middleware('auth');
 
-Route::resource('/todolist', TaskController::class)->middleware('auth');
+Route::resource('/tasks', TaskController::class)->middleware('auth');

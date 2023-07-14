@@ -44,7 +44,7 @@ class TaskController extends Controller
         ]);
 
         Task::create($validation);
-        return redirect('/todolist')->with('sukses', 'Tugas berhasil ditambahkan') ;
+        return redirect('/tasks')->with('sukses', 'Tugas berhasil ditambahkan') ;
     }
 
     /**
@@ -87,8 +87,16 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy(Task $task) //note Task harus sama dengan route list
     {
-        //
+        Task::destroy($task->id);
+        return redirect('/tasks')->with('sukses', 'tugas berhasil dihapus');
     }
+
+    // public function destroy($id)
+    // {
+    //     // dd($id);
+    //     Task::destroy($id);
+    //     return redirect('/tasks')->with('sukses', 'tugas berhasil dihapus');
+    // }
 }

@@ -4,19 +4,22 @@
 <h1>ini todolist</h1>
 
 @if (session()->has('sukses'))
-    <h6 style="color: rgba(102, 255, 0, 0.766)">{{ session('sukses') }}</h3>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('sukses') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 @endif
 
-<form action="/todolist" method="post">
+<form action="/tasks" method="post">
     @csrf
     <label for="tugas">Tugas</label>
-    <input type="text" id="tugas" name="tugas">
+    <input type="text" id="tugas" name="tugas" required>
 
     <label for="deskripsi">deskripsi</label>
-    <input type="text" id="deskripsi" name="deskripsi">
+    <input type="text" id="deskripsi" name="deskripsi" required>
 
-    <label for="eksekusi">eksekusi</label>
-    <input type="datetime-local" id="eksekusi" name="eksekusi">
+    <label for="eksekusi">Waktu</label>
+    <input type="datetime-local" id="eksekusi" name="eksekusi" required>
 
     <button type="submit">kirim</button>
 
@@ -31,7 +34,8 @@
             <th>No</th>
             <th>Tugas</th>
             <th>Deskripsi</th>
-            <th>Eksekusi</th>
+            <th>Waktu</th>
+            <th>Aksi</th>
         </tr>
     @foreach ($tasks as $task)
         <tr>
@@ -39,6 +43,15 @@
             <td>{{ $task->tugas }}</td>
             <td>{{ $task->deskripsi }}</td>
             <td>{{ $task->eksekusi }}</td>
+            <td >
+                <button><a href="/tasks/{{ $task->id }}/edit">edit</a></button> |
+                <form action="/tasks/{{ $task->id }}" method="post" class="d-inline">
+                {{-- <form action="{{ route('tasks.destroy', $task->id) }}" method="post" class="d-inline"> --}}
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit">hapus</button>
+                </form>
+            </td>
         </tr>
     @endforeach
 </table>
