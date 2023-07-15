@@ -1,8 +1,23 @@
 @extends('layouts.main')
 
 @section('container')
-<h1>ini todolist</h1>
 
+{{-- logout --}}
+<div class="d-flex flex-row-reverse">
+    <form action="/logout" method="post">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+{{-- menampilkan nama user --}}
+<h4>Selamat Datang {{ auth()->user()->name }}</h4>
+
+{{-- judul --}}
+<br>
+<h1 class="text-center">Todolist</h1>
+
+{{-- flash message --}}
 @if (session()->has('sukses'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('sukses') }}
@@ -10,6 +25,7 @@
     </div>
 @endif
 
+{{-- form task --}}
 <form action="/tasks" method="post">
     @csrf
     <label for="tugas">Tugas</label>
@@ -26,6 +42,7 @@
 </form>
 
 {{-- tampilkan semua task --}}
+<br>
 <h2>tugas saat ini</h2>
 
 <table class="table table-striped table-sm ">

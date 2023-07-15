@@ -23,7 +23,8 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('login.index');
 });
-Route::post('/login', [LoginController::class, 'authee']);
+Route::post('/login', [LoginController::class, 'auth']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::resource('/tasks', TaskController::class)->middleware('auth');
 

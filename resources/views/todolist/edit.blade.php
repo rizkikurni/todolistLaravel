@@ -20,4 +20,6 @@
     <button type="submit">Update</button>
 
 </form>
+
+<button><a href="/tasks">Kembali</a></button>
 @endsection

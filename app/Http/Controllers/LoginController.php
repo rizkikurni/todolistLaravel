@@ -84,7 +84,7 @@ class LoginController extends Controller
         //
     }
 
-    public function authee(Request $request){
+    public function auth(Request $request){
 
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -104,5 +104,12 @@ class LoginController extends Controller
         }
 
         return 'gagal';
+    }
+
+    public function logout(){
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/');
     }
 }
