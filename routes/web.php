@@ -25,9 +25,8 @@ Route::get('/login', function () {
 });
 Route::post('/login', [LoginController::class, 'authee']);
 
-
-// Route::get('/todolist', function(){
-//     return view('todolist.index');
-// })->middleware('auth');
-
 Route::resource('/tasks', TaskController::class)->middleware('auth');
+
+// untuk mengganti parameter tanpa perlu mengganti model tapi ini tidak berlaku untuk resource
+// Route::get('/tasks/{user:username}')
+

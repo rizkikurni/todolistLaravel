@@ -44,9 +44,10 @@
             <td>{{ $task->deskripsi }}</td>
             <td>{{ $task->eksekusi }}</td>
             <td >
-                <button><a href="/tasks/{{ $task->id }}/edit">edit</a></button> |
-                <form action="/tasks/{{ $task->id }}" method="post" class="d-inline">
-                {{-- <form action="{{ route('tasks.destroy', $task->id) }}" method="post" class="d-inline"> --}}
+                {{-- <button><a href="/tasks/{{ $task->tugas }}/edit">edit</a></button> | --}}
+                <button><a href="{{ route('tasks.edit', $task->tugas) }}">edit</a></button> |
+                {{-- <form action="/tasks/{{ $task->tugas }}" method="post" class="d-inline"> --}}
+                <form action="{{ route('tasks.destroy', $task->tugas) }}" method="post" class="d-inline">
                     @method('DELETE')
                     @csrf
                     <button type="submit">hapus</button>

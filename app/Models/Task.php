@@ -13,4 +13,10 @@ class Task extends Model
         'deskripsi',
         'eksekusi',
     ];
+
+    // ini adalah untuk mengubah parameter id menjadi sesuai yang di inginkan
+    public function getRouteKeyName()
+    {
+        return 'tugas';
+    }
 }

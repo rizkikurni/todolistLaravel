@@ -66,7 +66,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        return view('todolist.edit', [
+            'task' => $task
+        ]);
     }
 
     /**
@@ -78,7 +80,14 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $validation = $request->validate([
+            'tugas' => 'required|max:100',
+            'deskripsi' => 'required|max:255',
+            'eksekusi' => 'required'
+        ]);
+
+        Task::where('id', $task->id)->update($validation);
+        return redirect('/tasks')->with('sukses', 'Tugas berhasil diupdate') ;
     }
 
     /**
