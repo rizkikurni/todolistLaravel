@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->string('tugas');
             $table->text('deskripsi');
             $table->dateTime('eksekusi');

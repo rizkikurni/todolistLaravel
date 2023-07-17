@@ -14,8 +14,14 @@ class TaskController extends Controller
      */
     public function index()
     {
+        // ini untuk menampilkan data semuanya
+        // return view('todolist.index',[
+        //     'tasks' => Task::all()
+        // ]);
+
+        // ini untuk menampilkan hanya task yang dibuat user
         return view('todolist.index',[
-            'tasks' => Task::all()
+            'tasks' => Task::where('user_id', auth()->user()->id)->get()
         ]);
     }
 
@@ -42,7 +48,7 @@ class TaskController extends Controller
             'deskripsi' => 'required|max:255',
             'eksekusi' => 'required'
         ]);
-
+        $validation['user_id'] = auth()->user()->id;
         Task::create($validation);
         return redirect('/tasks')->with('sukses', 'Tugas berhasil ditambahkan') ;
     }
@@ -85,6 +91,8 @@ class TaskController extends Controller
             'deskripsi' => 'required|max:255',
             'eksekusi' => 'required'
         ]);
+
+        $validation['user_id'] = auth()->user()->id;
 
         Task::where('id', $task->id)->update($validation);
         return redirect('/tasks')->with('sukses', 'Tugas berhasil diupdate') ;
