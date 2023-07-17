@@ -15,7 +15,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        //
+        return view('login.index');
     }
 
     /**
@@ -110,6 +110,6 @@ class LoginController extends Controller
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/login');
     }
 }
